@@ -30,11 +30,11 @@ class Pointcloud_to_image
     ros::Subscriber sub; 
 };
 
-void pointcloud_callback( const sensor_msgs::PointCloud2ConstPtr& msg )
+void Pointcloud_to_image::pointcloud_callback( const sensor_msgs::PointCloud2ConstPtr& msg )
 {
-    // printf ("Cloud: width = %d, height = %d\n", msg->width, msg->height);
-    // BOOST_FOREACH (const pcl::PointXYZ& pt, msg->points)
-    // printf ("\t(%f, %f, %f)\n", pt.x, pt.y, pt.z);
+    printf ("Cloud: width = %d, height = %d\n", msg->width, msg->height);
+    BOOST_FOREACH (const pcl::PointXYZ& pt, msg->points)
+    printf ("\t(%f, %f, %f)\n", pt.x, pt.y, pt.z);
 }
 
 
