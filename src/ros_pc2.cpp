@@ -22,7 +22,7 @@ class Pointcloud_to_image
 {
   public:
     //function header
-    void pointcloud_callback( const sensor_msgs::PointCloud2ConstPtr& );
+    void pointcloud_callback(const sensor_msgs::PointCloud2ConstPtr&);
     // void help();
 
     //ros header
@@ -30,11 +30,13 @@ class Pointcloud_to_image
     ros::Subscriber sub; 
 };
 
-void Pointcloud_to_image::pointcloud_callback( const sensor_msgs::PointCloud2ConstPtr& msg )
+void Pointcloud_to_image::pointcloud_callback(const sensor_msgs::PointCloud2ConstPtr& msg)
 {
-    printf ("Cloud: width = %d, height = %d\n", msg->width, msg->height);
-    // BOOST_FOREACH (const pcl::PointXYZ& pt, msg->points)
-    // printf ("\t(%f, %f, %f)\n", pt.x, pt.y, pt.z);
+    pcl::PCLPointCloud2 pcl_pc2;
+    pcl_conversions::toPCL(*msg,pcl_pc2);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr pcl_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::fromPCLPointCloud2(pcl_pc2,*pcl_cloud);
+    //do stuff with temp_cloud here
 }
 
 
@@ -46,11 +48,12 @@ int main( int argc, char* argv[] )
     ros::NodeHandle nh("~");
 
     Pointcloud_to_image pointcloud2image;
-
+    std::string topic = nh.resolveName("point_cloud");
+    uint32_t queue_size = 1;
     // pointcloud2image.pub = n.advertise<std_msgs::Int32MultiArray>("hough_line",1);
     // pointcloud2image.sub = n.subscribe<PointCloud>("/camera/cloud/point_cloud", 100, 
     //                                                 &Pointcloud_to_image::pointcloud_callback, &pointcloud2image);  
-    ros::Subscriber sub = n.subscribe("/camera/cloud/point_cloud", 100, &Pointcloud_to_image::pointcloud_callback, &pointcloud2image);
-
+    ros::Subscriber sub = n.subscribe <sensor_msgs::PointCloud2> (topic, queue_size, &Pointcloud_to_image::pointcloud_callback, &pointcloud2image);
+    // ros::Subscriber sub = nh.subscribe(topic, queue_size, callback);
     ros::spin();
 }

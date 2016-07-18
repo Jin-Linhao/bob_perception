@@ -75,6 +75,18 @@ target_link_libraries(
         ${PCL_LIBRARIES}  
     )
 
+add_executable(
+  ros_pc2_node
+  src/ros_pc2.cpp
+)
+
+
+target_link_libraries(
+  ros_pc2_node
+        ${catkin_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${PCL_LIBRARIES}  
+    )
 
 
 
