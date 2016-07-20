@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg = "rosbag" type = "play" name = "player" args = "-l /home/bob/catkin_ws/src/bob_perception/bag/test_plain.bag" />
+	<node pkg="bob_perception" type="depth_image_node" name="depth_image_node" output="screen"/>
+
+
+</launch>
