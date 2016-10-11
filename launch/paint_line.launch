@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="bob_perception" type="paint_border_node" name="paint_border_node" output="screen"/>
+
+
+</launch>

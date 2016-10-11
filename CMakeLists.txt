@@ -88,6 +88,16 @@ target_link_libraries(
         ${PCL_LIBRARIES}  
     )
 
+add_executable(
+  paint_border_node
+  src/paint_line.cpp
+)
+target_link_libraries(
+  paint_border_node
+        ${catkin_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${PCL_LIBRARIES}  
+    )
 
 
 #add_dependencies(zed_wrapper_node ${PROJECT_NAME}_gencfg)
