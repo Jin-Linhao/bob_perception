@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="host" default="192.168.0.14" />
+<!--   <node type="position.py" pkg="bob_perception" name="motor_tf_broadcaster"/> -->
+
+  <node pkg="lms1xx" name="lms1xx" type="LMS1xx_node">
+    <param name="host" value="$(arg host)" />
+  </node>
+
+  <node type="laser_scan_assembler" pkg="laser_assembler" name="laser_scan_assembler">
+    <remap from="scan" to="scan"/>
+    <param name="max_scans" type="int" value="400" />
+    <param name="fixed_frame" type="string" value="world" />
+  </node>
+
+   <!-- <node type="periodic_snapshotter" pkg="laser_assembler" name="periodic_snapshotter"/> -->
+
+</launch>

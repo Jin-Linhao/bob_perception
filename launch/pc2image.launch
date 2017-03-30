@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="bob_perception" type="pointcloud2image_node" name="pointcloud2image_node" output="screen"/>
+
+
+</launch>

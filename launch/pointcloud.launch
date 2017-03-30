@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="bob_perception" type="pointcloud_sub_node" name="pointcloud_sub_node" output="screen"/>
+
+
+</launch>
