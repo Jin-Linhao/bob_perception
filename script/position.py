@@ -52,11 +52,11 @@ for count in range(0, 200):
 	if feedback_position == 0 or feedback_position == 1024:
 		ser.write("\x01\x06\x00\x7D\x00\x00\x19\xD2")
 		time.sleep(0.2)
-		br = tf.TransformBroadcaster()
-		br.sendTransform((0, 0, 0),  
-					 tf.transformations.quaternion_from_euler(0, 0, feedback_position*0.01),  
-					 rospy.Time.now(),  
-					 "laser",  "world")  
+		# br = tf.TransformBroadcaster()
+		# br.sendTransform((0, 0, 0),  
+		# 			 tf.transformations.quaternion_from_euler(0, 0, feedback_position*0.01),  
+		# 			 rospy.Time.now(),  
+		# 			 "laser",  "world")  
 		continue
 	elif feedback_position <= expected_position + 10 and feedback_position >= expected_position - 10:
 		expected_position = feedback_position

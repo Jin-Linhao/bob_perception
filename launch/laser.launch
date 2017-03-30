@@ -10,7 +10,7 @@
 
   <node type="laser_scan_assembler" pkg="laser_assembler" name="laser_scan_assembler">
     <remap from="scan" to="scan"/>
-    <param name="max_scans" type="int" value="400" />
+    <param name="max_scans" type="int" value="40000" />
     <param name="fixed_frame" type="string" value="world" />
   </node>
 
