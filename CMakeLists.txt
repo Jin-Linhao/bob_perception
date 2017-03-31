@@ -18,7 +18,7 @@ endif()
 
 find_package(OpenCV 2.4 COMPONENTS core highgui imgproc REQUIRED)
 find_package(PCL REQUIRED)
-
+find_package(Boost REQUIRED COMPONENTS system signals)
 find_package(catkin REQUIRED COMPONENTS
   image_transport
   roscpp
@@ -26,6 +26,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   cv_bridge
   dynamic_reconfigure
+  laser_geometry
 )
 
 
@@ -50,6 +51,7 @@ include_directories(
 	${catkin_INCLUDE_DIRS} 
 	${OpenCV_INCLUDE_DIRS}
 	${PCL_INCLUDE_DIRS}
+	${Boost_INCLUDE_DIRS}
 )
 
 link_directories(${PCL_LIBRARY_DIRS})
@@ -63,13 +65,13 @@ add_definitions(-std=c++11)# -m64) #-Wall)
 
 
 add_executable(
-  pointcloud2iamge_node
+  pointcloud2image_node
   src/pointcloud2image.cpp
 )
 
 
 target_link_libraries(
-  pointcloud2iamge_node
+  pointcloud2image_node
         ${catkin_LIBRARIES}
         ${OpenCV_LIBS}
         ${PCL_LIBRARIES}  
@@ -98,6 +100,35 @@ target_link_libraries(
         ${OpenCV_LIBS}
         ${PCL_LIBRARIES}  
     )
+
+
+add_executable(
+  pointcloud_sub_node
+  src/pointcloud_sub.cpp
+)
+target_link_libraries(
+  pointcloud_sub_node
+        ${catkin_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${PCL_LIBRARIES}  
+)
+
+
+
+#add_executable(
+#  laser_to_pointcloud_node
+#  src/laserscan_to_pointcloud.cpp
+#)
+#target_link_libraries(
+#  laser_to_pointcloud_node
+#        ${catkin_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${PCL_LIBRARIES}  
+#)
+
+#add_dependencies(laser_to_pointcloud_node ${PROJECT_NAME}_gencpp -lboost_system)
+
+
 
 
 #add_dependencies(zed_wrapper_node ${PROJECT_NAME}_gencfg)
